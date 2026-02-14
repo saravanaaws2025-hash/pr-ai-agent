@@ -1,0 +1,24 @@
+{
+  "generated": [
+    {
+      "source": "/Users/saravanachilla/Downloads/sb-product-management-with-pr-test-agent/sb-product-management/src/main/java/com/example/demo/repository/ProductRepository.java",
+      "test": "/Users/saravanachilla/Downloads/sb-product-management-with-pr-test-agent/sb-product-management/src/test/java/com/example/demo/repository/ProductRepositoryTest.java",
+      "type": "REPOSITORY"
+    },
+    {
+      "source": "/Users/saravanachilla/Downloads/sb-product-management-with-pr-test-agent/sb-product-management/src/main/java/com/example/demo/controller/ProductController.java",
+      "test": "/Users/saravanachilla/Downloads/sb-product-management-with-pr-test-agent/sb-product-management/src/test/java/com/example/demo/controller/ProductControllerTest.java",
+      "type": "CONTROLLER"
+    },
+    {
+      "source": "/Users/saravanachilla/Downloads/sb-product-management-with-pr-test-agent/sb-product-management/src/main/java/com/example/demo/model/Product.java",
+      "test": "/Users/saravanachilla/Downloads/sb-product-management-with-pr-test-agent/sb-product-management/src/test/java/com/example/demo/model/ProductTest.java",
+      "type": "ENTITY"
+    },
+    {
+      "source": "/Users/saravanachilla/Downloads/sb-product-management-with-pr-test-agent/sb-product-management/src/main/java/com/example/demo/service/ProductService.java",
+      "test": "/Users/saravanachilla/Downloads/sb-product-management-with-pr-test-agent/sb-product-management/src/test/java/com/example/demo/service/ProductServiceTest.java",
+      "type": "SERVICE"
+    }
+  ]
+}
