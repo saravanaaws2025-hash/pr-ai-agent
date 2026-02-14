@@ -34,4 +34,9 @@ public class Product {
     public Integer getQuantity() {
         return this.quantity;
     }
+    // add this method
+    public boolean isInStock() {
+        return this.quantity != null && this.quantity > 0;
+    }
+
 }
