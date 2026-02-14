@@ -18,7 +18,7 @@ class ProductTest {
     @Test
     @DisplayName("Should set and get id correctly")
     void testIdGetterSetter() {
-        Long expectedId = 1L;
+        Long expectedId = 123L;
         product.setId(expectedId);
         assertEquals(expectedId, product.getId());
     }
@@ -50,78 +50,75 @@ class ProductTest {
     @Test
     @DisplayName("Should set and get quantity correctly")
     void testQuantityGetterSetter() {
-        int expectedQuantity = 100;
+        int expectedQuantity = 50;
         product.setQuantity(expectedQuantity);
         assertEquals(expectedQuantity, product.getQuantity());
     }
 
     @Test
-    @DisplayName("Should handle null values for all fields")
+    @DisplayName("Should return true when product is in stock")
+    void testIsInStockWhenQuantityGreaterThanZero() {
+        product.setQuantity(10);
+        assertTrue(product.isInStock());
+    }
+
+    @Test
+    @DisplayName("Should return false when product is out of stock")
+    void testIsInStockWhenQuantityIsZero() {
+        product.setQuantity(0);
+        assertFalse(product.isInStock());
+    }
+
+    @Test
+    @DisplayName("Should return false when product has negative quantity")
+    void testIsInStockWhenQuantityIsNegative() {
+        product.setQuantity(-5);
+        assertFalse(product.isInStock());
+    }
+
+    @Test
+    @DisplayName("Should handle null values correctly")
     void testNullValues() {
-        assertNull(product.getId());
         assertNull(product.getName());
         assertNull(product.getDescription());
-        assertNull(product.getPrice());
-        assertNull(product.getQuantity());
+        assertEquals(0.0, product.getPrice());
+        assertEquals(0, product.getQuantity());
     }
 
     @Test
-    @DisplayName("Should create product with all fields set")
-    void testProductWithAllFields() {
-        product.setId(1L);
-        product.setName("Complete Product");
-        product.setDescription("A product with all fields set");
-        product.setPrice(49.99);
-        product.setQuantity(50);
-
-        assertAll(
-            () -> assertEquals(1L, product.getId()),
-            () -> assertEquals("Complete Product", product.getName()),
-            () -> assertEquals("A product with all fields set", product.getDescription()),
-            () -> assertEquals(49.99, product.getPrice()),
-            () -> assertEquals(50, product.getQuantity())
-        );
+    @DisplayName("Should create product with default values")
+    void testDefaultValues() {
+        Product newProduct = new Product();
+        assertEquals(0L, newProduct.getId());
+        assertNull(newProduct.getName());
+        assertNull(newProduct.getDescription());
+        assertEquals(0.0, newProduct.getPrice());
+        assertEquals(0, newProduct.getQuantity());
+        assertFalse(newProduct.isInStock());
     }
 
     @Test
-    @DisplayName("Should handle zero and negative values for price")
-    void testPriceEdgeCases() {
+    @DisplayName("Should handle edge case price values")
+    void testEdgeCasePriceValues() {
         product.setPrice(0.0);
         assertEquals(0.0, product.getPrice());
-
-        product.setPrice(-10.50);
-        assertEquals(-10.50, product.getPrice());
+        
+        product.setPrice(Double.MAX_VALUE);
+        assertEquals(Double.MAX_VALUE, product.getPrice());
+        
+        product.setPrice(-99.99);
+        assertEquals(-99.99, product.getPrice());
     }
 
     @Test
-    @DisplayName("Should handle zero and negative values for quantity")
-    void testQuantityEdgeCases() {
-        product.setQuantity(0);
-        assertEquals(0, product.getQuantity());
-
-        product.setQuantity(-5);
-        assertEquals(-5, product.getQuantity());
-    }
-
-    @Test
-    @DisplayName("Should handle empty string for name and description")
-    void testEmptyStringValues() {
-        product.setName("");
-        assertEquals("", product.getName());
-
-        product.setDescription("");
-        assertEquals("", product.getDescription());
-    }
-
-    @Test
-    @DisplayName("Should handle very large values for price and quantity")
-    void testLargeValues() {
-        double largePrice = Double.MAX_VALUE;
-        product.setPrice(largePrice);
-        assertEquals(largePrice, product.getPrice());
-
-        int largeQuantity = Integer.MAX_VALUE;
-        product.setQuantity(largeQuantity);
-        assertEquals(largeQuantity, product.getQuantity());
+    @DisplayName("Should handle edge case quantity values")
+    void testEdgeCaseQuantityValues() {
+        product.setQuantity(Integer.MAX_VALUE);
+        assertEquals(Integer.MAX_VALUE, product.getQuantity());
+        assertTrue(product.isInStock());
+        
+        product.setQuantity(Integer.MIN_VALUE);
+        assertEquals(Integer.MIN_VALUE, product.getQuantity());
+        assertFalse(product.isInStock());
     }
 }

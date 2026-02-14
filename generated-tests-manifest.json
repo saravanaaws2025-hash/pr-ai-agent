@@ -1,23 +1,18 @@
 {
+  "mode": "diff",
+  "base_branch": "main",
+  "start_at": 0,
+  "max_files": 25,
+  "spring_boot_application": "com.example.demo.DemoApplication",
   "generated": [
     {
-      "source": "/Users/saravanachilla/Downloads/sb-product-management-with-pr-test-agent/sb-product-management/src/main/java/com/example/demo/repository/ProductRepository.java",
-      "test": "/Users/saravanachilla/Downloads/sb-product-management-with-pr-test-agent/sb-product-management/src/test/java/com/example/demo/repository/ProductRepositoryTest.java",
-      "type": "REPOSITORY"
-    },
-    {
-      "source": "/Users/saravanachilla/Downloads/sb-product-management-with-pr-test-agent/sb-product-management/src/main/java/com/example/demo/controller/ProductController.java",
-      "test": "/Users/saravanachilla/Downloads/sb-product-management-with-pr-test-agent/sb-product-management/src/test/java/com/example/demo/controller/ProductControllerTest.java",
-      "type": "CONTROLLER"
-    },
-    {
-      "source": "/Users/saravanachilla/Downloads/sb-product-management-with-pr-test-agent/sb-product-management/src/main/java/com/example/demo/model/Product.java",
-      "test": "/Users/saravanachilla/Downloads/sb-product-management-with-pr-test-agent/sb-product-management/src/test/java/com/example/demo/model/ProductTest.java",
+      "source": "src/main/java/com/example/demo/model/Product.java",
+      "test": "src/test/java/com/example/demo/model/ProductTest.java",
       "type": "ENTITY"
     },
     {
-      "source": "/Users/saravanachilla/Downloads/sb-product-management-with-pr-test-agent/sb-product-management/src/main/java/com/example/demo/service/ProductService.java",
-      "test": "/Users/saravanachilla/Downloads/sb-product-management-with-pr-test-agent/sb-product-management/src/test/java/com/example/demo/service/ProductServiceTest.java",
+      "source": "src/main/java/com/example/demo/service/ProductService.java",
+      "test": "src/test/java/com/example/demo/service/ProductServiceTest.java",
       "type": "SERVICE"
     }
   ]
