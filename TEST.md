@@ -159,4 +159,40 @@ Git diff empty | Robust merge-base fallback |
 
 ---
 
+## 12. Run for diff
+- export AWS_REGION=us-east-1
+- export BEDROCK_MODEL_ID="arn:aws:bedrock:us-east-1:302263057519:inference-profile/us.anthropic.- - claude-opus-4-20250514-v1:0"
+
+- export MODE=diff
+- export BASE_BRANCH=main
+- export MAX_FILES=25
+
+# run tests after generation
+- export RUN_MAVEN=true
+- export MAVEN_CMD="mvn test -DfailIfNoTests=false"
+
+# auto commit + push after tests pass
+- export AUTO_COMMIT=false
+- export AUTO_PUSH=false
+- export COMMIT_MSG="test: add AI-generated tests (diff)"
+- export ALLOW_MAIN_AUTOCOMMIT=fase
+- export STAGE_TESTS_ONLY=false
+# default behavior stages only tests + manifest
+
+- python .github/scripts/impact_generated_bedrock_v2.py
+
+## 12. Run for full
+- export MODE=full
+- export MAX_FILES=50
+- export START_AT=0
+
+- export RUN_MAVEN=true
+- export AUTO_COMMIT=false
+- export AUTO_PUSH=false
+- export COMMIT_MSG="test: add AI-generated tests (full)"
+- export ALLOW_MAIN_AUTOCOMMIT=false
+- export STAGE_TESTS_ONLY=false
+- python .github/scripts/impact_generated_bedrock_v2.py
+
+
 **This setup is production-grade and PR-safe.**
