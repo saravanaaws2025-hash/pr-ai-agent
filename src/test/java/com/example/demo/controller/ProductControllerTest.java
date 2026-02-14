@@ -19,6 +19,7 @@ import java.util.List;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.hamcrest.Matchers.*;
 
 @ExtendWith(MockitoExtension.class)
 class ProductControllerTest {
@@ -56,12 +57,13 @@ class ProductControllerTest {
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$[0].id").value(1))
-                .andExpect(jsonPath("$[0].name").value("Product 1"))
-                .andExpect(jsonPath("$[0].price").value(100.0))
-                .andExpect(jsonPath("$[1].id").value(2))
-                .andExpect(jsonPath("$[1].name").value("Product 2"))
-                .andExpect(jsonPath("$[1].price").value(200.0));
+                .andExpect(jsonPath("$", hasSize(2)))
+                .andExpect(jsonPath("$[0].id", is(1)))
+                .andExpect(jsonPath("$[0].name", is("Product 1")))
+                .andExpect(jsonPath("$[0].price", is(100.0)))
+                .andExpect(jsonPath("$[1].id", is(2)))
+                .andExpect(jsonPath("$[1].name", is("Product 2")))
+                .andExpect(jsonPath("$[1].price", is(200.0)));
     }
 
     @Test
@@ -72,7 +74,25 @@ class ProductControllerTest {
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$").isArray())
-                .andExpect(jsonPath("$").isEmpty());
+                .andExpect(jsonPath("$", hasSize(0)));
+    }
+
+    @Test
+    void getProducts_ReturnsSingleProduct() throws Exception {
+        Product product = new Product();
+        product.setId(1L);
+        product.setName("Single Product");
+        product.setPrice(150.0);
+
+        when(productService.getAllProducts()).thenReturn(Collections.singletonList(product));
+
+        mockMvc.perform(get("/products")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$", hasSize(1)))
+                .andExpect(jsonPath("$[0].id", is(1)))
+                .andExpect(jsonPath("$[0].name", is("Single Product")))
+                .andExpect(jsonPath("$[0].price", is(150.0)));
     }
 }

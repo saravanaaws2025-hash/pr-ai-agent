@@ -44,7 +44,7 @@ class ProductServiceTest {
     }
 
     @Test
-    void getAllProducts_ReturnsListOfProducts() {
+    void getAllProducts_WhenProductsExist_ReturnsProductList() {
         List<Product> expectedProducts = Arrays.asList(product1, product2);
         when(productRepository.findAll()).thenReturn(expectedProducts);
 
@@ -57,7 +57,7 @@ class ProductServiceTest {
     }
 
     @Test
-    void getAllProducts_ReturnsEmptyListWhenNoProducts() {
+    void getAllProducts_WhenNoProductsExist_ReturnsEmptyList() {
         when(productRepository.findAll()).thenReturn(Collections.emptyList());
 
         List<Product> actualProducts = productService.getAllProducts();
@@ -68,7 +68,7 @@ class ProductServiceTest {
     }
 
     @Test
-    void deleteProduct_CallsRepositoryDeleteById() {
+    void deleteProduct_WithValidId_CallsRepositoryDeleteById() {
         Long productId = 1L;
 
         productService.deleteProduct(productId);
@@ -77,7 +77,7 @@ class ProductServiceTest {
     }
 
     @Test
-    void deleteProduct_WithNullId_CallsRepositoryDeleteById() {
+    void deleteProduct_WithNullId_CallsRepositoryDeleteByIdWithNull() {
         productService.deleteProduct(null);
 
         verify(productRepository, times(1)).deleteById(null);
